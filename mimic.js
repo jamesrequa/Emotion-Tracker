@@ -74,6 +74,7 @@ function onReset() {
   $("#logs").html("");  // clear out previous log
 
   // TODO(optional): You can restart the game as well
+  startGame();
 };
 
 // Add a callback to notify when camera access is allowed
@@ -101,6 +102,7 @@ detector.addEventListener("onInitializeSuccess", function() {
   $("#face_video").css("display", "none");
 
   // TODO(optional): Call a function to initialize the game, if needed
+  startGame();
 });
 
 // Add a callback to receive the results from processing an image
@@ -188,6 +190,16 @@ function randomEmoji() {
 function generateEmoji() {
   targetEmoji = randomEmoji();
   setTargetEmoji(targetEmoji);
+}
+
+function startGame() {
+  // reset all scores at start of a new game
+  correct = 0;
+  total = 0;
+  setScore(correct, total);
+
+  // generate a new random emoji
+  generateEmoji();
 }
 
 
