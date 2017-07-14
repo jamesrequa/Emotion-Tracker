@@ -22,6 +22,8 @@ detector.detectAllAppearance();
 // Unicode values for all emojis Affectiva can detect
 var emojis = [ 128528, 9786, 128515, 128524, 128527, 128521, 128535, 128539, 128540, 128542, 128545, 128563, 128561 ];
 
+var timer;
+
 // Update target emoji being displayed by supplying a unicode value
 function setTargetEmoji(code) {
   $("#target").html("&#" + code + ";");
@@ -61,6 +63,7 @@ function onStop() {
   if (detector && detector.isRunning) {
     detector.removeEventListener();
     detector.stop();  // stop detector
+    clearTimeout(timer);
   }
 };
 
@@ -199,15 +202,23 @@ function startGame() {
   total = 0;
   setScore(correct, total);
 
-  // generate a new random emoji
+  // generate a new random emoji and begin the countdown
   generateEmoji();
+  startTimer();
 }
 
-// this function generates a new random emoji and updates the score totals
+// creates a countdown timer which resets after 6 seconds. After coutndown it calls the emoji generator, updates scores
+function startTimer() {
+  clearTimeout(timer);
+  timer = setTimeout(nextEmoji, 6000);
+}
+
+// this function generates a new random emoji, updates the score totals, and starts a new countdown timer
 function nextEmoji() {
 generateEmoji();
 total += 1;
 setScore(correct, total);
+startTimer();
 }
 
 function playGame(canvas, img, face) {
