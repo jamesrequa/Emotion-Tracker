@@ -202,6 +202,13 @@ function startGame() {
   generateEmoji();
 }
 
+// this function generates a new random emoji and updates the score totals
+function nextEmoji() {
+generateEmoji();
+total += 1;
+setScore(correct, total);
+}
+
 
 
 // NOTE:
