@@ -1,4 +1,4 @@
-# Mimic Me Emotion Tracker (work-in-progress)
+# Mimic Me Emotion Tracker
 
 
 ## Overview
