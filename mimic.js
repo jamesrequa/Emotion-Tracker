@@ -133,6 +133,7 @@ detector.addEventListener("onImageResultsSuccess", function(faces, image, timest
     drawEmoji(canvas, image, faces[0]);
 
     // TODO: Call your function to run the game (define it first!)
+    playGame(canvas, image, faces[0]);
   }
 });
 
@@ -209,6 +210,23 @@ total += 1;
 setScore(correct, total);
 }
 
+function playGame(canvas, img, face) {
+  // if no emoji was generated yet then the game hasn't started yet
+  if (targetEmoji === 0) {
+    startGame();
+  }
+
+  // convert dominant emoji to unicode so it matches to our random generated emoji
+  emoji = toUnicode(face.emojis.dominantEmoji)
+
+  // increase correct score if the dominant emoji matches the random generated one
+  if (emoji === targetEmoji) {
+    correct += 1;
+
+    // call another random generated emoji
+    nextEmoji();
+  }
+}
 
 
 // NOTE:
