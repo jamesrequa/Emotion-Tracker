@@ -74,7 +74,6 @@ function onReset() {
   $("#logs").html("");  // clear out previous log
 
   // TODO(optional): You can restart the game as well
-  // <your code here>
 };
 
 // Add a callback to notify when camera access is allowed
@@ -102,7 +101,6 @@ detector.addEventListener("onInitializeSuccess", function() {
   $("#face_video").css("display", "none");
 
   // TODO(optional): Call a function to initialize the game, if needed
-  // <your code here>
 });
 
 // Add a callback to receive the results from processing an image
@@ -133,7 +131,6 @@ detector.addEventListener("onImageResultsSuccess", function(faces, image, timest
     drawEmoji(canvas, image, faces[0]);
 
     // TODO: Call your function to run the game (define it first!)
-    // <your code here>
   }
 });
 
@@ -171,11 +168,29 @@ function drawEmoji(canvas, img, face) {
   // Draw emoji using ctx.strokeText() or fillText()
   ctx.fillText(
       face.emojis.dominantEmoji,
-      (face.featurePoints[0].x + 100),
+      (face.featurePoints[0].x + 250),
       (face.featurePoints[0].y - 50));
 }
 
-// TODO: Define any variables and functions to implement the Mimic Me! game mechanics
+// Initialize score variables to zero
+var correct = 0;
+var total = 0;
+
+// Initialize target emoji variable which will later be assigned to a random emoji unicode value
+var targetEmoji = 0;
+
+// this function generates a random emoji unicode value selected as an index from the emoji array
+function randomEmoji() {
+  return emojis[Math.floor(Math.random() * emojis.length)]
+}
+
+// this function assigns the random emoji unicode value as the target emoji
+function generateEmoji() {
+  targetEmoji = randomEmoji();
+  setTargetEmoji(targetEmoji);
+}
+
+
 
 // NOTE:
 // - Remember to call your update function from the "onImageResultsSuccess" event handler above
